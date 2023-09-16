@@ -2,12 +2,17 @@ const express = require('express');
 
 const app = express();
 
-app.get('/:id', (req, res) =>{
-    const{ id }= req.params
-    res.send (`peticion GET ${id}`);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get('/:name/:id', (req, res) =>{
+    const{ name,id }= req.params
+    res.send (`${name}: ${id}`);
 });
 
 app.post('/', (req, res) =>{
+    const { email, password } = req.body;
+    res.send(`${email}: ${password}`);
     res.send('peticion POST')
 });
 
